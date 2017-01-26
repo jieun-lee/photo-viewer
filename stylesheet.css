@@ -1,0 +1,38 @@
+#main {
+	width: 600px;
+	height: 400px;
+	margin-top: 40px;
+	border: 3px solid black;
+	background-color: gray;
+}
+
+#main img {
+	width: 100%;
+	height: 100%;
+}
+
+.arrowholder {
+	width: 40px;
+	height: 100px;
+	margin: 9.5px;
+	display: inline-block;
+	background-color: white;
+}
+
+.arrow {
+	width: 40px;
+	height: 40px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	background-color: blue;
+}
+
+.preview {
+	width: 100px;
+	height: 100px;
+	margin: 9px;
+	margin-top: 20px;
+	border: 1px solid black;
+	display: inline-block;
+	background-color: green;
+}
