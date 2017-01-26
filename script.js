@@ -1,9 +1,6 @@
 // PHOTO VIEWER
 // by Jieun Lee
 
-// index of image currently in view
-var curr = 2;
-
 var images = [
 	"images/test0.jpg",
 	"images/test1.jpg",
@@ -12,7 +9,10 @@ var images = [
 	"images/test4.jpg",
 	"images/test5.jpg"
 ];
+
+var curr = 2;
 var numImg = images.length;
+document.addEventListener("keydown", keyDownHandler, false);
 
 var setCurrent = function(n) {
 	curr = n;
@@ -36,39 +36,60 @@ var getIndexByName = function(sName) {
 			return i;
 		}
 	}
-	// image does not exist
-	// return value of 0 for now to avoid errors
+	// image does not exist, return first image (for now)
 	return 0;
+}
+
+var selectImage = function(sName) {
+	$("#main img").attr("src", sName);
+	curr = getIndexByName(sName);
+	setImages();
+}
+
+var scrollLeft = function() {
+	var imgSrc = $("#prev4 img").attr("src");
+	$("#main img").attr("src", imgSrc);
+	curr = ((curr+numImg) + 1) % numImg;
+	setImages();
+}
+
+var scrollRight = function() {
+	var imgSrc = $("#prev2 img").attr("src");
+	$("#main img").attr("src", imgSrc);
+	curr = ((curr+numImg) - 1) % numImg;
+	setImages();
+}
+
+function keyDownHandler(e) {
+	// 37 = left arrow key
+	if (e.keyCode == 37) {
+		scrollLeft();
+	}
+	// 39 = right arrow key
+	else if (e.keyCode == 39) {
+		scrollRight();
+	}
 }
 
 $(document).ready(function(){
 
 	// hide for now
-	// will be used for sliding animations
 	$("#prev0").hide();
 	$("#prev6").hide();
 
-	// action when preview image is clicked
+	// preview image clicked
 	$(".preview img").click(function() {
 		var imgSrc = $(this).attr("src");
-		$("#main img").attr("src", imgSrc);
-		curr = getIndexByName(imgSrc);
-		setImages();
+		selectImage(imgSrc);
 	});
 
-	// action when left arrow button is clicked
+	// left arrow button clicked
 	$("#leftarrow").click(function() {
-		var imgSrc = $("#prev2 img").attr("src");
-		$("#main img").attr("src", imgSrc);
-		curr = ((curr+numImg) - 1) % numImg;
-		setImages();
+		scrollLeft();
 	});
 
-	// action when right arrow button is clicked
+	// right arrow button clicked
 	$("#rightarrow").click(function() {
-		var imgSrc = $("#prev4 img").attr("src");
-		$("#main img").attr("src", imgSrc);
-		curr = ((curr+numImg) +1) % numImg;
-		setImages();
+		scrollRight();
 	});
 });
