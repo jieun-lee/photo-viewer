@@ -24,15 +24,23 @@
 	height: 40px;
 	margin-top: 30px;
 	margin-bottom: 30px;
-	background-color: blue;
+	/*will add arrow icons later*/
+	background-color: white;
 }
 
 .preview {
 	width: 100px;
 	height: 100px;
-	margin: 9px;
+	margin: 8px;
 	margin-top: 20px;
-	border: 1px solid black;
+	border: 2px solid black;
 	display: inline-block;
-	background-color: green;
+	overflow: hidden;
+	background-color: white;
+}
+
+.preview img {
+	height: 100%;
+	position: relative;
+	left: -25px;
 }
