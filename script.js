@@ -1,63 +1,90 @@
 // PHOTO VIEWER
 // by Jieun Lee
 
+// array of image objects
+// each object has a name and caption
 var images = [
-	"images/test0.jpg",
-	"images/test1.jpg",
-	"images/test2.jpg",
-	"images/test3.jpg",
-	"images/test4.jpg",
-	"images/test5.jpg"
+	{name: "images/test0.jpg", caption: "Leaves, Downtown, Water"},
+	{name: "images/test1.jpg", caption: "Reflection"},
+	{name: "images/test2.jpg", caption: "Rainy Day"},
+	{name: "images/test3.jpg", caption: "Red"},
+	{name: "images/test4.jpg", caption: "Orange Leaf"},
+	{name: "images/test5.jpg", caption: "Dock"}
 ];
-
-var curr = 2;
 var numImg = images.length;
 document.addEventListener("keydown", keyDownHandler, false);
 
-var setCurrent = function(n) {
-	curr = n;
-}
+// index of current image
+var curr = 2;
 
-var setImages = function() {
+// index of preview images
+var prevImg = [0, 1, 2, 3, 4];
+
+// sets the indices of the preview images
+var setPrevArray = function() {
 	var min = ((curr+numImg) - 2);
-	var getImgSrc = function(n) {
-		return images[(min+n) % numImg];
+	for (var i = 0; i < 5; i++) {
+		prevImg[i] = (min+i) % numImg;
 	}
-	$("#prev1 img").attr("src", getImgSrc(0));
-	$("#prev2 img").attr("src", getImgSrc(1));
-	$("#prev3 img").attr("src", getImgSrc(2));
-	$("#prev4 img").attr("src", getImgSrc(3));
-	$("#prev5 img").attr("src", getImgSrc(4));
 }
 
+// returns the image based on the preview image index
+var getImage = function(n) {
+	return images[prevImg[n]].name;
+}
+
+// sets the caption of the main image
+var setCaption = function() {
+	$("#caption p").text(images[curr].caption);
+}
+
+// sets the images and captions
+var setImages = function(iCurr) {
+	// sets index of current image
+	curr = iCurr;
+
+	// sets the indices of the preview images
+	setPrevArray();
+
+	// sets preview images based on array values
+	$("#prev1 img").attr("src", getImage(0));
+	$("#prev2 img").attr("src", getImage(1));
+	$("#prev3 img").attr("src", getImage(2));
+	$("#prev4 img").attr("src", getImage(3));
+	$("#prev5 img").attr("src", getImage(4));
+
+	// set main image and caption
+	$("#main img").attr("src", getImage(2));
+	setCaption();
+}
+
+// returns the index of the image with the given name
 var getIndexByName = function(sName) {
 	for (var i = 0; i < 6; i++) {
-		if (images[i] === sName) {
+		if (images[i].name === sName) {
 			return i;
 		}
 	}
-	// image does not exist, return first image (for now)
+	// image does not exist, return first image
 	return 0;
 }
 
-var selectImage = function(sName) {
-	$("#main img").attr("src", sName);
-	curr = getIndexByName(sName);
-	setImages();
+// sets the image based on click-select
+var clickSelectImage = function(sName) {
+	var iCurr = getIndexByName(sName);
+	setImages(iCurr);
 }
 
+// scrolls left
 var scrollLeft = function() {
-	var imgSrc = $("#prev4 img").attr("src");
-	$("#main img").attr("src", imgSrc);
-	curr = ((curr+numImg) + 1) % numImg;
-	setImages();
+	var iCurr = ((curr+numImg) + 1) % numImg;
+	setImages(iCurr);
 }
 
+// scrolls right
 var scrollRight = function() {
-	var imgSrc = $("#prev2 img").attr("src");
-	$("#main img").attr("src", imgSrc);
-	curr = ((curr+numImg) - 1) % numImg;
-	setImages();
+	iCurr = ((curr+numImg) - 1) % numImg;
+	setImages(iCurr);
 }
 
 function keyDownHandler(e) {
@@ -76,11 +103,14 @@ $(document).ready(function(){
 	// hide for now
 	$("#prev0").hide();
 	$("#prev6").hide();
+	$("#caption").hide();
+	setCaption();
+
 
 	// preview image clicked
 	$(".preview img").click(function() {
 		var imgSrc = $(this).attr("src");
-		selectImage(imgSrc);
+		clickSelectImage(imgSrc);
 	});
 
 	// left arrow button clicked
@@ -91,5 +121,13 @@ $(document).ready(function(){
 	// right arrow button clicked
 	$("#rightarrow").click(function() {
 		scrollRight();
+	});
+
+	$("#main").mouseenter(function() {
+		$("#caption").show();
+	});
+
+	$("#main").mouseleave(function() {
+		$("#caption").hide();
 	});
 });
