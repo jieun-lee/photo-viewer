@@ -20,6 +20,8 @@ var curr = 2;
 // index of preview images
 var prevImg = [0, 1, 2, 3, 4];
 
+var bGalleryOpen = true;
+
 // sets the indices of the preview images
 var setPrevArray = function() {
 	var min = ((curr+numImg) - 2);
@@ -87,6 +89,19 @@ var scrollRight = function() {
 	setImages(iCurr);
 }
 
+var toggleGallery = function() {
+	// if gallery is open, close gallery
+	if (bGalleryOpen) {
+		$("#gallery").animate({top: "-50%"});
+		bGalleryOpen = false;
+	}
+	// if gallery is closed, open gallery
+	else {
+		$("#gallery").animate({top: "0px"});
+		bGalleryOpen = true;
+	}
+}
+
 function keyDownHandler(e) {
 	// 37 = left arrow key
 	if (e.keyCode == 37) {
@@ -105,6 +120,7 @@ $(document).ready(function(){
 	$("#prev6").hide();
 	$("#caption").hide();
 	setCaption();
+	toggleGallery();
 
 
 	// preview image clicked
@@ -129,5 +145,9 @@ $(document).ready(function(){
 
 	$("#main").mouseleave(function() {
 		$("#caption").hide();
+	});
+
+	$("#gallery-toggle").click(function() {
+		toggleGallery();
 	});
 });
