@@ -1,8 +1,11 @@
+/*
+** STYLING FOR GALLERY
+*/
 #gallery {
 	z-index: 3;
 	background-color: rgba(0, 0, 0, 0);
 	position: absolute;
-	top: 0px;
+	top: -50%;
 	width: 45%;
 	right: 6%;
 	height: 55%;
@@ -55,6 +58,11 @@
 	left: -25px;
 }
 
+
+
+/*
+** STYLING FOR MAIN IMAGE
+*/
 #main {
 	width: 600px;
 	height: 400px;
@@ -91,44 +99,102 @@
 	bottom: -12px;
 }
 
+
+
+/*
+** STYLING FOR PHOTOPICKER
+*/
+#photopicker {
+	position: relative;
+	width: 700px;
+	height: 104px;
+	margin-top: 15px;
+	background-color: orange;
+}
+
 .arrowholder {
-	width: 40px;
-	height: 100px;
-	margin: 9.5px;
-	display: inline-block;
-	background-color: white;
+	position: absolute;
+	width: 5%;
+	height: 100%;
+	top: 0px;
+	z-index: 5;
+	background-color: yellow;
+}
+
+#leftarrowholder {
+	left: 0px;
+}
+
+#rightarrowholder {
+	right: 0px;
 }
 
 .arrow {
-	width: 40px;
-	height: 40px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-	/*will add arrow icons later*/
+	position: absolute;
+	width: 100%;
+	height: 30px;
+	margin-top: 37px;
+	margin-bottom: 37px;
 	background-color: blue;
+}
+
+
+
+/*
+** STYLING FOR PREVIEW SECTION
+*/
+#preview-container {
+	position: absolute;
+	width: 90%;
+	height: 100%;
+	background-color: pink;
+	top: 0px;
+	left: 5%;
+	overflow: hidden;
 }
 
 .preview {
 	width: 100px;
 	height: 100px;
-	margin: 8px;
-	margin-top: 20px;
+	/*
+	margin-left: 7px;
+	margin-right: 7px;
+	*/
 	border: 2px solid black;
 	display: inline-block;
 	overflow: hidden;
 	background-color: white;
+	position: absolute;
 }
+
+#prev1 {
+	left: 16px;
+}
+
+#prev2 {
+	/* 16 + 104 + 14 + 5? */
+	left: 139px;
+}
+
+#prev3 {
+	/* 139 + 104 + 14 + 6? */
+	left: 263px;
+}
+
+#prev4 {
+	/* 263 + 104 + 14 + 6? */
+	left: 387px;
+}
+
+#prev5 {
+	/* 388 + 104 + 14 + 6? */
+	left: 510px;
+}
+/* set these manually, idk where these numbers came from
+use the length to specify more natural and normal values */
 
 .preview img {
 	height: 100%;
 	position: relative;
 	left: -25px;
-}
-
-#prev0 {
-	width: 0px;
-}
-
-#prev6 {
-	width: 0px;
 }

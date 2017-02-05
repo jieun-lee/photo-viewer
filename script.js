@@ -20,7 +20,9 @@ var curr = 2;
 // index of preview images
 var prevImg = [0, 1, 2, 3, 4];
 
-var bGalleryOpen = true;
+var bGalleryOpen = false;
+
+var borderProp = "2px solid black";
 
 // sets the indices of the preview images
 var setPrevArray = function() {
@@ -120,8 +122,6 @@ $(document).ready(function(){
 	$("#prev6").hide();
 	$("#caption").hide();
 	setCaption();
-	toggleGallery();
-
 
 	// preview image clicked
 	$(".preview img").click(function() {
