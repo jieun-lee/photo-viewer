@@ -26,8 +26,8 @@
 	position: absolute;
 	bottom: 0px;
 	right: 0px;
-	width: 15%;
-	height: 18%;
+	width: 95px;
+	height: 15%;
 }
 
 #gallery-photo-holder {
@@ -109,16 +109,14 @@
 	width: 700px;
 	height: 104px;
 	margin-top: 15px;
-	background-color: orange;
 }
 
 .arrowholder {
 	position: absolute;
-	width: 5%;
+	width: 30px;
 	height: 100%;
 	top: 0px;
 	z-index: 5;
-	background-color: yellow;
 }
 
 #leftarrowholder {
@@ -145,53 +143,21 @@
 */
 #preview-container {
 	position: absolute;
-	width: 90%;
+	width: 600px;
 	height: 100%;
-	background-color: pink;
 	top: 0px;
-	left: 5%;
+	left: 50px;
 	overflow: hidden;
 }
 
 .preview {
 	width: 100px;
 	height: 100px;
-	/*
-	margin-left: 7px;
-	margin-right: 7px;
-	*/
 	border: 2px solid black;
-	display: inline-block;
 	overflow: hidden;
 	background-color: white;
 	position: absolute;
 }
-
-#prev1 {
-	left: 16px;
-}
-
-#prev2 {
-	/* 16 + 104 + 14 + 5? */
-	left: 139px;
-}
-
-#prev3 {
-	/* 139 + 104 + 14 + 6? */
-	left: 263px;
-}
-
-#prev4 {
-	/* 263 + 104 + 14 + 6? */
-	left: 387px;
-}
-
-#prev5 {
-	/* 388 + 104 + 14 + 6? */
-	left: 510px;
-}
-/* set these manually, idk where these numbers came from
-use the length to specify more natural and normal values */
 
 .preview img {
 	height: 100%;

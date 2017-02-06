@@ -1,8 +1,18 @@
 // PHOTO VIEWER
 // by Jieun Lee
 
+////////////////////////////////////////////////////////////////////////////////
+// VARIABLES
+////////////////////////////////////////////////////////////////////////////////
+
+// array of preview box objects
+var prevBox = ["#prev0", "#prev1", "#prev2", "#prev3", "#prev4", "#prev5"];
+
+// in prevBox, the index of the center image
+var prevCent = 3;
+
+
 // array of image objects
-// each object has a name and caption
 var images = [
 	{name: "images/test0.jpg", caption: "Leaves, Downtown, Water"},
 	{name: "images/test1.jpg", caption: "Reflection"},
@@ -17,12 +27,25 @@ document.addEventListener("keydown", keyDownHandler, false);
 // index of current image
 var curr = 2;
 
+
 // index of preview images
+// TODO: want to replace this
 var prevImg = [0, 1, 2, 3, 4];
 
 var bGalleryOpen = false;
 
-var borderProp = "2px solid black";
+////////////////////////////////////////////////////////////////////////////////
+// HELPER FUNCTIONS
+////////////////////////////////////////////////////////////////////////////////
+
+// sets the position of the preview images
+var setPreviewPos = function() {
+	for (var i = 0; i < prevBox.length; i++) {
+		// images are 104px each + 20px in between
+		var imgPos = (i-1)*124 + "px";
+		$(prevBox[i]).css("left", imgPos);
+	}
+}
 
 // sets the indices of the preview images
 var setPrevArray = function() {
@@ -73,6 +96,10 @@ var getIndexByName = function(sName) {
 	return 0;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// ACTION-HANDLING FUNCTIONS
+////////////////////////////////////////////////////////////////////////////////
+
 // sets the image based on click-select
 var clickSelectImage = function(sName) {
 	var iCurr = getIndexByName(sName);
@@ -115,11 +142,14 @@ function keyDownHandler(e) {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// JQUERY DOCUMENT
+////////////////////////////////////////////////////////////////////////////////
+
 $(document).ready(function(){
 
-	// hide for now
-	$("#prev0").hide();
-	$("#prev6").hide();
+	setPreviewPos();
+
 	$("#caption").hide();
 	setCaption();
 
