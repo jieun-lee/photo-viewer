@@ -119,14 +119,6 @@
 	z-index: 5;
 }
 
-#leftarrowholder {
-	left: 0px;
-}
-
-#rightarrowholder {
-	right: 0px;
-}
-
 .arrow {
 	position: absolute;
 	width: 100%;
@@ -136,11 +128,14 @@
 	background-color: blue;
 }
 
+#leftarrowholder {
+	left: 0px;
+}
 
+#rightarrowholder {
+	right: 0px;
+}
 
-/*
-** STYLING FOR PREVIEW SECTION
-*/
 #preview-container {
 	position: absolute;
 	width: 600px;
@@ -155,7 +150,7 @@
 	height: 100px;
 	border: 2px solid black;
 	overflow: hidden;
-	background-color: white;
+	background-color: gray;
 	position: absolute;
 }
 

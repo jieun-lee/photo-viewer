@@ -36,14 +36,8 @@ var isGalleryOpen = false;
 // HELPER FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
-/*
-// array: length of array to deal with
-// start: current index
-// offset: what to subtract/add
-var getNext = function(len, start, offset) {
-	return ((start+len+offset) % len);
-}
-*/
+// Circular Arays:
+// (start+len+offset) % len
 
 // sets the main image and caption
 var setMain = function() {
