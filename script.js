@@ -5,12 +5,15 @@
 // VARIABLES
 ////////////////////////////////////////////////////////////////////////////////
 
+// array of preview box positions
+// images are 104px each with 20px in between
+var prevPos = ["-124px", "0px", "124px", "248px", "372px", "496px", "620px"];
+
 // array of preview box objects
 var prevBox = ["#prev0", "#prev1", "#prev2", "#prev3", "#prev4", "#prev5"];
 
-// in prevBox, the index of the center image
-var prevCent = 3;
-
+// in prevBox, the index of the hidden image
+var hiddenInd = 0;
 
 // array of image objects
 var images = [
@@ -27,62 +30,70 @@ document.addEventListener("keydown", keyDownHandler, false);
 // index of current image
 var curr = 2;
 
-
-// index of preview images
-// TODO: want to replace this
-var prevImg = [0, 1, 2, 3, 4];
-
-var bGalleryOpen = false;
+var isGalleryOpen = false;
 
 ////////////////////////////////////////////////////////////////////////////////
 // HELPER FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
-// sets the position of the preview images
-var setPreviewPos = function() {
-	for (var i = 0; i < prevBox.length; i++) {
-		// images are 104px each + 20px in between
-		var imgPos = (i-1)*124 + "px";
-		$(prevBox[i]).css("left", imgPos);
-	}
+/*
+// array: length of array to deal with
+// start: current index
+// offset: what to subtract/add
+var getNext = function(len, start, offset) {
+	return ((start+len+offset) % len);
 }
+*/
 
-// sets the indices of the preview images
-var setPrevArray = function() {
-	var min = ((curr+numImg) - 2);
-	for (var i = 0; i < 5; i++) {
-		prevImg[i] = (min+i) % numImg;
-	}
-}
-
-// returns the image based on the preview image index
-var getImage = function(n) {
-	return images[prevImg[n]].name;
-}
-
-// sets the caption of the main image
-var setCaption = function() {
+// sets the main image and caption
+var setMain = function() {
+	$("#main img").attr("src", images[curr].name);
 	$("#caption p").text(images[curr].caption);
 }
 
-// sets the images and captions
-var setImages = function(iCurr) {
-	// sets index of current image
-	curr = iCurr;
+// sets preview images based on current image
+var setPreviewPos = function() {
+	for (var i = 0; i < 6; i++) {
+		var imgInd = (curr+numImg+i-3) % numImg;
+		$(prevBox[i] + " img").attr("src", images[imgInd].name);
+		$(prevBox[i]).css("left", prevPos[i]);
+	}
+	hiddenInd = 0;
+}
 
-	// sets the indices of the preview images
-	setPrevArray();
+// returns the image on the left (true) or right (false)
+var getAdjacentImage = function(bLeft) {
+	if (bLeft) {
+		return images[(curr+numImg-3) % numImg].name;
+	} else {
+		return images[(curr+3) % numImg].name;
+	}
+}
 
-	// sets preview images based on array values
-	$("#prev1 img").attr("src", getImage(0));
-	$("#prev2 img").attr("src", getImage(1));
-	$("#prev3 img").attr("src", getImage(2));
-	$("#prev4 img").attr("src", getImage(3));
-	$("#prev5 img").attr("src", getImage(4));
+// slides the images to the right
+var moveRight = function() {
+	$(prevBox[hiddenInd] + " img").attr("src", getAdjacentImage(true));
+	$(prevBox[hiddenInd]).css("left", prevPos[0]);
 
-	// set main image and caption
-	$("#main img").attr("src", getImage(2));
-	setCaption();
+	for (var i = 0; i < 6; i++) {
+		var move = {left: prevPos[i+1]};
+		var index = (hiddenInd+6+i) % 6;
+		$(prevBox[index]).animate(move, {queue: false});
+	}
+	hiddenInd = (hiddenInd + 5) % 6;
+}
+
+// slides the images to the left
+var moveLeft = function() {
+	$(prevBox[hiddenInd] + " img").attr("src", getAdjacentImage(false));
+	$(prevBox[hiddenInd]).css("left", prevPos[6]);
+
+	for (var i = 0; i < 6; i++) {
+		var move = {left: prevPos[i]};
+		var index = (hiddenInd+6+i+1) % 6;
+		$(prevBox[index]).animate(move, {queue: false});
+	}
+	hiddenInd = (hiddenInd + 1) % 6;
 }
 
 // returns the index of the image with the given name
@@ -100,34 +111,31 @@ var getIndexByName = function(sName) {
 // ACTION-HANDLING FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
-// sets the image based on click-select
 var clickSelectImage = function(sName) {
-	var iCurr = getIndexByName(sName);
-	setImages(iCurr);
+	curr = getIndexByName(sName);
+	setPreviewPos();
+	setMain();
 }
 
-// scrolls left
 var scrollLeft = function() {
-	var iCurr = ((curr+numImg) + 1) % numImg;
-	setImages(iCurr);
+	moveLeft();
+	curr = ((curr+numImg) + 1) % numImg;
+	setMain();
 }
 
-// scrolls right
 var scrollRight = function() {
-	iCurr = ((curr+numImg) - 1) % numImg;
-	setImages(iCurr);
+	moveRight();
+	curr = ((curr+numImg) - 1) % numImg;
+	setMain();
 }
 
 var toggleGallery = function() {
-	// if gallery is open, close gallery
-	if (bGalleryOpen) {
+	if (isGalleryOpen) {
 		$("#gallery").animate({top: "-50%"});
-		bGalleryOpen = false;
-	}
-	// if gallery is closed, open gallery
-	else {
+		isGalleryOpen = false;
+	} else {
 		$("#gallery").animate({top: "0px"});
-		bGalleryOpen = true;
+		isGalleryOpen = true;
 	}
 }
 
@@ -149,9 +157,8 @@ function keyDownHandler(e) {
 $(document).ready(function(){
 
 	setPreviewPos();
-
+	setMain();
 	$("#caption").hide();
-	setCaption();
 
 	// preview image clicked
 	$(".preview img").click(function() {
