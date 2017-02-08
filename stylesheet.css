@@ -31,7 +31,6 @@
 }
 
 #gallery-photo-holder {
-	background-color: rgba(255, 255, 255, 0);
 	position: absolute;
 	width: 85%;
 	height: 80%;
@@ -46,10 +45,11 @@
 .gallery-frame {
 	width: 100px;
 	height: 100px;
-	margin: 5px;
-	background-color: rgba(255, 255, 255, 1);
+	margin: 7px;
+	background-color: white;
 	display: inline-block;
 	border: 2px solid black;
+	overflow: hidden;
 }
 
 .gallery-frame img {

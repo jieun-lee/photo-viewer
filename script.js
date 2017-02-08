@@ -133,6 +133,18 @@ var toggleGallery = function() {
 	}
 }
 
+var makeGallery = function() {
+	for (var i = 0; i <  numImg; i++) {
+		var imageDiv = '<img src="' + images[i].name + '">';
+		$("#gallery-photo-holder").append('<div class="gallery-frame">' + imageDiv + '</div>');
+	}
+	// temporary: want more photos in gallery for testing
+	for (var i = 0; i <  numImg; i++) {
+		var imageDiv = '<img src="' + images[i].name + '">';
+		$("#gallery-photo-holder").append('<div class="gallery-frame">' + imageDiv + '</div>');
+	}
+}
+
 function keyDownHandler(e) {
 	// 37 = left arrow key
 	if (e.keyCode == 37) {
@@ -153,6 +165,7 @@ $(document).ready(function(){
 	setPreviewPos();
 	setMain();
 	$("#caption").hide();
+	makeGallery();
 
 	// preview image clicked
 	$(".preview img").click(function() {
