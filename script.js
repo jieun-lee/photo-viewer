@@ -168,6 +168,14 @@ $(document).ready(function(){
 		clickSelectImage(imgSrc);
 	});
 
+	// arrow button hovered
+	$(".arrow").hover(
+		function() {
+			$(this).css({"width": "28px", "height": "32px", "margin-top": "36px"});
+		}, function() {
+			$(this).css({"width": "26px", "height": "30px", "margin-top": "37px"});
+	});
+
 	// left arrow button clicked
 	$("#leftarrow").click(function() {
 		scrollLeft();
@@ -178,12 +186,12 @@ $(document).ready(function(){
 		scrollRight();
 	});
 
-	$("#main").mouseenter(function() {
-		$("#caption").show();
-	});
-
-	$("#main").mouseleave(function() {
-		$("#caption").hide();
+	// toggle caption on image hover
+	$("#main").hover(
+		function() {
+			$("#caption").show();
+		}, function() {
+			$("#caption").hide();
 	});
 
 	$("#gallery-toggle").click(function() {
