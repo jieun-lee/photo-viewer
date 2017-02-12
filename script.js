@@ -138,11 +138,6 @@ var makeGallery = function() {
 		var imageDiv = '<img src="' + images[i].name + '">';
 		$("#gallery-photo-holder").append('<div class="gallery-frame">' + imageDiv + '</div>');
 	}
-	// temporary: want more photos in gallery for testing
-	for (var i = 0; i <  numImg; i++) {
-		var imageDiv = '<img src="' + images[i].name + '">';
-		$("#gallery-photo-holder").append('<div class="gallery-frame">' + imageDiv + '</div>');
-	}
 }
 
 function keyDownHandler(e) {
@@ -192,6 +187,12 @@ $(document).ready(function(){
 	});
 
 	$("#gallery-toggle").click(function() {
+		toggleGallery();
+	});
+
+	$(".gallery-frame img").click(function() {
+		var imgSrc = $(this).attr("src");
+		clickSelectImage(imgSrc);
 		toggleGallery();
 	});
 });
