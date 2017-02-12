@@ -16,13 +16,21 @@ var prevBox = ["#prev0", "#prev1", "#prev2", "#prev3", "#prev4", "#prev5"];
 var hiddenInd = 0;
 
 // array of image objects
+// use images larger than 600px x 400px
 var images = [
-	{name: "images/test0.jpg", caption: "Leaves, Downtown, Water"},
-	{name: "images/test1.jpg", caption: "Reflection"},
-	{name: "images/test2.jpg", caption: "Rainy Day"},
-	{name: "images/test3.jpg", caption: "Red"},
-	{name: "images/test4.jpg", caption: "Orange Leaf"},
-	{name: "images/test5.jpg", caption: "Dock"}
+	{name: "images/00.jpg", caption: "Cafe Joie Macarons"},
+	{name: "images/01.jpg", caption: "Downtown Reflection"},
+	{name: "images/02.jpg", caption: "Delicious Bossam"},
+	{name: "images/03.jpg", caption: "Giraffes"},
+	{name: "images/04.jpg", caption: "Minimelts"},
+	{name: "images/05.jpg", caption: "Polaroid"},
+	{name: "images/06.jpg", caption: "Hamburger and Fries"},
+	{name: "images/07.jpg", caption: "Autumn Leaves"},
+	{name: "images/08.jpg", caption: "Character Pancakes"},
+	{name: "images/09.jpg", caption: "LED Rose Garden"},
+	{name: "images/10.jpg", caption: "Umbrella"},
+	{name: "images/11.jpg", caption: "Boats"},
+	{name: "images/12.jpg", caption: "Big Red Leaf"}
 ];
 var numImg = images.length;
 document.addEventListener("keydown", keyDownHandler, false);
@@ -92,7 +100,7 @@ var moveLeft = function() {
 
 // returns the index of the image with the given name
 var getIndexByName = function(sName) {
-	for (var i = 0; i < 6; i++) {
+	for (var i = 0; i < numImg; i++) {
 		if (images[i].name === sName) {
 			return i;
 		}

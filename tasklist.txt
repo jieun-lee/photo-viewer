@@ -1,0 +1,24 @@
+1. Improve Gallery UI
+	a) Button/Main Background Colour and UI
+	b) Implement max-width for width
+	c) Make photos in last row left-aligned
+	d) Scrollbar
+	e) Auto-close gallery when we click outside the region
+
+2. Auto-add Photos
+	a) Add photos automatically from images folder
+	b) Set caption as the title
+	c) Set caption as the title, only if unspecified
+
+3. Improve Preview Image Scrolling
+	a) Add more boxes to circular array
+	b) Add all photos as boxes to decrease load/set time
+	c) Both options have consequenses
+	d) Change arrow image
+	e) Hover preview image effects
+	f) Reconsider scrolling directions
+
+4. Enable Different Photo Sizes/Ratios
+	a) Deal with smaller photos (set value for max-width)
+	b) Deal with different ratios
+	c) Use white spaces and make sure preview doesn't move up
